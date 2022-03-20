@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+
+<h1 class="text-center">Hello {{current_user.username}}</h1>
+<h1>{{neighbourhood.name}}</h1>
+<h1>Neighbourhood occupants: {{neighbourhood | length}}</h1>
+<h1>Police</h1>
+{% for station in police %}
+{{station.name}}
+{{station.email}}
+{{station.contact}}
+{{station.alternative_contact}}
+{% endfor %}
+{% endblock %}
