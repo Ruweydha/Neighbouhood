@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+
+<h1 class="text-center">Hello {{current_user.username}}</h1>
+<a href="{% url 'registerOccupants' %}">Register</a><br>
+<a href="{% url 'post' %}">Post</a> <br>
+{% for neighbourhood in neighbourhoods %}
+<a href="{% url 'neighbourhood' neighbourhood.id %}">{{neighbourhood.name}}</a><br>
+{% endfor %}
+<p>
+{% for station in police %}
+{{station.name}}
+{{station.email}}
+{{station.contact}}
+{{station.alternative_contact}}
+{% endfor %}
+</p>
+<p>
+  {% for business in businesses %}
+{{business.name}}
+{{business.email}}
+{{business.user.username}}
+
+{% endfor %}
+</p>
+<p>
+  {% for post in posts %}
+{{post.user.username}}
+{{post.post}}
+{% endfor %}
+</p>
+{% endblock %}
