@@ -17,6 +17,8 @@ def home(request):
         health_Department = HealthDepartment.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
         businesses = Businesses.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
         posts = Posts.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
+        print (posts)
+       
     return render(request, 'home.html', {"current_user":current_user, "neighbourhoods":neighbourhoods, "police":police, "businesses":businesses, "posts":posts, "occupant":occupant, "healthDepartment":health_Department})
 
 def register_occupant(request):
