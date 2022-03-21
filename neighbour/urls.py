@@ -9,7 +9,8 @@ urlpatterns = [
     path('register/occupants', views.register_occupant, name = 'registerOccupants'),
     path('view/neighborhood/<int:id>', views.view_neighborhood, name = 'neighbourhood'),
     path('profile', views.profile, name = 'profile'),
-    path('post/', views.create_post, name = 'post')
+    path('post/', views.create_post, name = 'post'),
+    path('search/', views.search_business, name = 'search_results')
 ]
 
 if settings.DEBUG:
