@@ -10,15 +10,20 @@ def home(request):
     neighbourhoods = Neighbourhood.objects.all()
     current_user = request.user
     occupant = Occupants.objects.filter(user = current_user).first()
-    police = Police.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
-    businesses = Businesses.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
-    posts = Posts.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
-    return render(request, 'home.html', {"current_user":current_user, "neighbourhoods":neighbourhoods, "police":police, "businesses":businesses, "posts":posts})
+    if not occupant:
+        return redirect("registerOccupants")
+    else:
+        police = Police.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
+        health_Department = HealthDepartment.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
+        businesses = Businesses.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
+        posts = Posts.objects.filter(neighbourhood = occupant.neighbourhood.id).all()
+    return render(request, 'home.html', {"current_user":current_user, "neighbourhoods":neighbourhoods, "police":police, "businesses":businesses, "posts":posts, "occupant":occupant, "healthDepartment":health_Department})
 
 def register_occupant(request):
     current_user = request.user
     if request.method == 'POST':
         form = OccupantsForm(request.POST, request.FILES)
+        
         if form.is_valid():
             occupant = form.save(commit = False)
             occupant.user = current_user
@@ -34,20 +39,28 @@ def register_occupant(request):
     return render(request, 'occupants.html',context)    
 
 def view_neighborhood(request, id):
+    current_user = request.user
     neighbourhood = Neighbourhood.objects.filter(pk = id).first()
+    neighbourhoods = Neighbourhood.objects.all()
     police = Police.objects.filter(neighbourhood = neighbourhood).all()
     HealthCareCenter = HealthDepartment.objects.filter(neighbourhood = neighbourhood).all()
+    occupants = Occupants.objects.filter(neighbourhood = neighbourhood).all()
 
     context = {
         "neighborhood": neighbourhood,
         "police": police,
-        "healthcareCenter": HealthCareCenter
+        "healthcareCenter": HealthCareCenter,
+        "current_user":current_user,
+        "occupants":occupants,
+        "neighbourhoods":neighbourhoods
+
     }
 
     return render(request, 'neighbourhood.html', context )
 
 def create_post(request):
-    current_user = request.user  
+    current_user = request.user 
+    neighbourhoods = Neighbourhood.objects.all()
     occupant = Occupants.objects.filter(user = current_user).first()  
     if request.method == 'POST':
         form = PostsForm(request.POST, request.FILES)
@@ -60,4 +73,26 @@ def create_post(request):
     else:
         form = PostsForm()   
 
-    return render(request, 'post.html', {"form":form})     
+    return render(request, 'post.html', {"form":form, "neighbourhoods":neighbourhoods})     
+
+def profile(request):
+    current_user = request.user  
+    neighbourhoods = Neighbourhood.objects.all()
+    occupant = Occupants.objects.filter(user = current_user).first()  
+    neighbourhood = Neighbourhood.objects.filter(pk = occupant.neighbourhood.id).first()
+    police = Police.objects.filter(neighbourhood = neighbourhood).all()
+    HealthCareCenter = HealthDepartment.objects.filter(neighbourhood = neighbourhood).all()
+    occupants = Occupants.objects.filter(neighbourhood = neighbourhood).all()
+
+    context = {
+        "neighborhood": neighbourhood,
+        "police": police,
+        "healthcareCenter": HealthCareCenter,
+        "current_user":current_user,
+        "occupants":occupants,
+        "occupant":occupant,
+        "neighbourhoods":neighbourhoods
+
+    }
+
+    return render(request, 'profile.html', context)
