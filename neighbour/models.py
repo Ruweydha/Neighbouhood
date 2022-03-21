@@ -49,7 +49,7 @@ class HealthDepartment(models.Model):
         return self.name
 
 class Occupants(models.Model):
-    name = CharField(max_length=30)
+    name = models.CharField(max_length=30, default='Ru')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     id_number = models.CharField(max_length=8)
@@ -57,6 +57,9 @@ class Occupants(models.Model):
     profile_pic = models.ImageField(upload_to = 'profile')
     location = models.CharField(max_length=30)
     about_me = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
 
 class Businesses(models.Model):
     name = models.CharField(max_length=30, default='max')
