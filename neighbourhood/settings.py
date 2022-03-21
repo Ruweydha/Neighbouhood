@@ -51,6 +51,7 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'ruweydhaabdinoor5@gmail.com'
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
