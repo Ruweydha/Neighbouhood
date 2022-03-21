@@ -1,28 +1,67 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 {% block content %}
+<div class="container-fluid first">
+  <div class="row">
+    <div class="col-md-6 words">
+      <div>
+        <h1>Welcome to {{occupant.neighbourhood.name}} the land of  happiness</h1> <br>
+        <h2>We are exicted that you are part of this community</h2>
+      </div>
+    </div>
+    <div class="col-md-6 image">
+      <img src="/static/images/building2.png" class="img-fluid mt-5" alt="">
+    </div>
+  </div>
+</div>
+<div class="heading">
+  <h1 class="text-center">Businesses</h1>
 
-<h1 class="text-center">Hello {{current_user.username}}</h1>
-<a href="{% url 'registerOccupants' %}">Register</a><br>
-<a href="{% url 'post' %}">Post</a> <br>
-{% for neighbourhood in neighbourhoods %}
-<a href="{% url 'neighbourhood' neighbourhood.id %}">{{neighbourhood.name}}</a><br>
-{% endfor %}
-<p>
-{% for station in police %}
-{{station.name}}
-{{station.email}}
-{{station.contact}}
-{{station.alternative_contact}}
-{% endfor %}
-</p>
-<p>
-  {% for business in businesses %}
-{{business.name}}
-{{business.email}}
-{{business.user.username}}
+</div>
+<div class="container">
+  <div class="row">
+    {% for business in businesses %}
+    <div class="col-md-4">
+      <div class="card mx-auto m-1 mt-2" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title"><strong>Name: </strong>{{business.name}}</h5>
+        <p class="card-text"><strong>email: </strong>{{business.email}}</p>
+        <p class="card-text"><strong>Owner: </strong>{{business.user.username}}</p>
+      </div>
+      
+    </div>
 
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<h1 class="text-center mt-5">Emergency Contacts</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="text-center">Police</h2>
+      {% for station in police %}
+      <p><strong>Name: </strong>{{station.name}}</p>
+      <p><strong>Email: </strong>{{station.email}}</p>
+      <p><strong>Contact: </strong>{{station.contact}}</p>
+      <p><strong>Alternative Contact: </strong>{{station.alternative_contact}}</p>
 {% endfor %}
+    </div>
+    <div class="col-md-6">
+      <h2 class="text-center">Health Department</h2>
+      {% for department in healthDepartment %}
+      <p><strong>Name: </strong>{{department.name}}</p>
+      <p><strong>Email: </strong>{{department.email}}</p>
+      <p><strong>Contact: </strong>{{department.contact}}</p>
+      <p><strong>Alternative Contact: </strong>{{department.alternative_contact}}</p>
+{% endfor %}
+    </div>
+  </div>
+</div>
+<p>
+
+
+
 </p>
 <p>
   {% for post in posts %}
