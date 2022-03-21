@@ -15,8 +15,17 @@ class Neighbourhood(models.Model):
     def create_neighbourhood(self):
         self.save()
 
-    def delete_neighbourhood(self):
-        Neighbourhood.objects.filter(id = self.id).delete()        
+    def delete_neighborhood(self):
+        self.delete()
+        
+    def update_neighborhood(self):
+        self.update()
+    def update_occupants(self):
+        self.update()
+
+    @classmethod
+    def find_neighborhood(cls, neighborhood_id):
+        return cls.objects.filter(id=neighborhood_id)
     
 
 class Police(models.Model):
