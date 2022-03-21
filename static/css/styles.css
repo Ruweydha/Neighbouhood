@@ -1,3 +1,31 @@
-h1{
-    color: blue;
+@import url('https://fonts.googleapis.com/css2?family=Antic+Didone&family=Libre+Baskerville&family=Licorice&family=Molle:ital@1&family=Poppins:ital@0;1&family=Raleway:wght@300&display=swap');
+.first{
+   background-color: #008c8c;
+   /* height: 100vh; */
+}
+body{
+    font-family: 'Raleway';
+}
+.words{
+    display: flex;
+    margin: 0%;
+    justify-content: center;
+    color: #000000;
+    text-align: left;
+    align-items: center;
+}
+.image{
+    height: 100%;
+}
+.image img{
+    height: 100%;
+    width: 100%;
+}
+.navbar{
+   background-color: #008c8c ;
+   border-bottom: 1px solid grey;
+  
+}
+.heading{
+    background-color: #e0af00;
 }
