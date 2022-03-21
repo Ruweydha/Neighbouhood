@@ -2,14 +2,31 @@
 {% load bootstrap5 %}
 {% block content %}
 
-<h1 class="text-center">Hello {{current_user.username}}</h1>
-<h1>{{neighbourhood.name}}</h1>
-<h1>Neighbourhood occupants: {{neighbourhood | length}}</h1>
-<h1>Police</h1>
-{% for station in police %}
-{{station.name}}
-{{station.email}}
-{{station.contact}}
-{{station.alternative_contact}}
-{% endfor %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="text-center">{{neighborhood.name}}</h2>
+            <p><strong>Location: </strong>{{neighborhood.location}}</p>
+            <p><strong>Occupants: </strong>{{occupants | length}}</p>
+        </div>
+      <div class="col-md-4">
+        <h2 class="text-center">Police</h2>
+        {% for station in police %}
+        <p><strong>Name: </strong>{{station.name}}</p>
+        <p><strong>Email: </strong>{{station.email}}</p>
+        <p><strong>Contact: </strong>{{station.contact}}</p>
+        <p><strong>Alternative Contact: </strong>{{station.alternative_contact}}</p>
+  {% endfor %}
+      </div>
+      <div class="col-md-4">
+        <h2 class="text-center">Health Department</h2>
+        {% for department in healthcareCenter %}
+        <p><strong>Name: </strong>{{department.name}}</p>
+        <p><strong>Email: </strong>{{department.email}}</p>
+        <p><strong>Contact: </strong>{{department.contact}}</p>
+        <p><strong>Alternative Contact: </strong>{{department.alternative_contact}}</p>
+  {% endfor %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
