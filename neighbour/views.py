@@ -21,6 +21,7 @@ def home(request):
        
     return render(request, 'home.html', {"current_user":current_user, "neighbourhoods":neighbourhoods, "police":police, "businesses":businesses, "posts":posts, "occupant":occupant, "healthDepartment":health_Department})
 
+@login_required(login_url='/accounts/login/')
 def register_occupant(request):
     current_user = request.user
     if request.method == 'POST':
@@ -40,6 +41,7 @@ def register_occupant(request):
     } 
     return render(request, 'occupants.html',context)    
 
+@login_required(login_url='/accounts/login/')
 def view_neighborhood(request, id):
     current_user = request.user
     neighbourhood = Neighbourhood.objects.filter(pk = id).first()
@@ -60,6 +62,7 @@ def view_neighborhood(request, id):
 
     return render(request, 'neighbourhood.html', context )
 
+@login_required(login_url='/accounts/login/')
 def create_post(request):
     current_user = request.user 
     neighbourhoods = Neighbourhood.objects.all()
@@ -77,6 +80,7 @@ def create_post(request):
 
     return render(request, 'post.html', {"form":form, "neighbourhoods":neighbourhoods})     
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user  
     neighbourhoods = Neighbourhood.objects.all()
@@ -99,6 +103,7 @@ def profile(request):
 
     return render(request, 'profile.html', context)
 
+@login_required(login_url='/accounts/login/')
 def search_business(request):
     if 'business' in request.GET and request.GET["business"]:
         search_term = request.GET.get("business")

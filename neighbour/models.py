@@ -9,22 +9,18 @@ class Neighbourhood(models.Model):
     location = models.CharField(max_length=30)
     Admin  = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-
-    def create_neighbourhood(self):
+    def create_neigbourhood(self):
         self.save()
 
-    def delete_neighborhood(self):
+    def delete_neighbourhood(self):
         self.delete()
-        
-    def update_neighborhood(self):
-        self.update()
-    def update_occupants(self):
-        self.update()
 
     @classmethod
-    def find_neighborhood(cls, neighborhood_id):
+    def update_neighbourhood(cls, id):
+        cls.objects.filter(id=id).update()
+
+    @classmethod
+    def find_neighbourhood(cls, neighborhood_id):
         return cls.objects.filter(id=neighborhood_id)
     
 
@@ -70,10 +66,24 @@ class Businesses(models.Model):
     def __str__(self):
         return self.name
 
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def update_business(cls, id):
+        cls.objects.filter(id=id).update()
+
+    @classmethod
+    def find_business(cls, neighborhood_id):
+        return cls.objects.filter(id=neighborhood_id)    
+
     @classmethod
     def search_by_name(cls,search_term):
         business = cls.objects.filter(name__icontains=search_term)
-        return business
+        return business   
     
 class Posts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
