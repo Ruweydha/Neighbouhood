@@ -1,22 +1,39 @@
-{% extends 'base.html' %}
 {% load bootstrap5 %}
-{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <meta charset="utf-8"> -->
+  <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
 
-<div class="container-fluid">
- <div class="container-lg" id="contentWrapper">
-     <div class="row mt-5">
-         <div id="main" class="col-lg-8 col-12 my-4">
+  {% if title %}
+  <title>Awwwards - {{title}}</title>
+  {% else %}
+    <title> Neighbourhood </title>
+    {{form.media}} 
+  {% endif %}
+  {% block styles %}
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">{% endblock %}
 
-             <div class="col-md-12">
-                 <form action="{% url 'registerOccupants' %}" method="post" enctype="multipart/form-data">
-                     {% csrf_token %}
-                     {% bootstrap_form form %}
-                     <input type="submit" class="btn btn-success btn-lg" value="Post">
-                 
-                 </form>
-             </div>
-             </div>
- </div>          
-</div>  
-</div> 
-{% endblock %}
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container-lg" id="contentWrapper">
+            <div class="row mt-5">
+                <div id="main" class="col-lg-8 col-12 my-4">
+                    <h2 class="text-center">Please fill out your details to see posts and information related to your neighbourhood</h2>
+                    <div class="col-md-12">
+                        <form action="{% url 'registerOccupants' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <input type="submit" class="btn  btn-lg" style="background-color: #e0af00;" value="Post">
+                        
+                        </form>
+                    </div>
+                    </div>
+        </div>          
+       </div>  
+    </div>
+</body>
+</html>
