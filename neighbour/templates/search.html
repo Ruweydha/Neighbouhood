@@ -1,0 +1,32 @@
+{%extends 'base.html'%} 
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if businesses %}
+      <h2>Found {{ businesses|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Found 0 businesses for the search term {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if businesses %}
+    {% for business in businesses %}
+      <div class="col-sm-6 col-md-3">
+        <div class="card mx-auto m-1 mt-2" style="width: 100%; background-color: #008c8c;">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Name: </strong>{{business.name}}</h5>
+            <p class="card-text"><strong>email: </strong>{{business.email}}</p>
+            <p class="card-text"><strong>Owner: </strong>{{business.user.username}}</p>
+          </div>
+          
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+{% endblock %}
